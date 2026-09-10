@@ -2,187 +2,336 @@
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bloom Again</title>
-<meta name="description" content="A private space to document, understand and recover from an emotionally abusive relationship.">
+<title>Bloom Again — a private record of what actually happened</title>
+<meta name="description" content="A private space to document, understand and recover from an emotionally abusive relationship. Encrypted on your device. iPhone and iPad.">
+<meta property="og:title" content="Bloom Again">
+<meta property="og:description" content="A private record of what actually happened.">
+<meta name="theme-color" content="#17132b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
- --ink:#1c1830;--muted:#5b5570;--line:#e6e2f0;--bg:#fbfaff;--card:#fff;
- --accent:#5b3fd6;--accent-soft:#efeafc;--sage:#3f9d7a;--amber:#d99a2b}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
- font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
- -webkit-font-smoothing:antialiased}
-.wrap{max-width:960px;margin:0 auto;padding:0 22px}
-a{color:var(--accent)}
+  --ink:#191430; --ink-2:#3d3557; --muted:#6b6285;
+  --bg:#fcfbfa; --bg-2:#f4f1f7; --card:#ffffff; --line:#e8e3f0;
+  --violet:#5b3fd6; --violet-soft:#efeafd;
+  --sage:#3f8f72; --rose:#c4547a;
+  --shadow:0 1px 2px rgba(25,20,48,.04), 0 12px 40px -12px rgba(25,20,48,.16);
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --measure:34rem;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#f0edf8; --ink-2:#cdc6e0; --muted:#9a92b4;
+    --bg:#120f22; --bg-2:#191430; --card:#1d1836; --line:#302849;
+    --violet:#b3a1ff; --violet-soft:#241d42;
+    --sage:#6fc4a3; --rose:#f08aa8;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 18px 50px -14px rgba(0,0,0,.6);
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:17px; line-height:1.65;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+.wrap{max-width:1080px; margin-inline:auto; padding-inline:clamp(20px,5vw,40px)}
+a{color:inherit}
 
-nav{display:flex;align-items:center;gap:10px;padding:26px 0}
-nav .name{font-weight:700;font-size:18px;letter-spacing:-.01em}
-nav .spacer{flex:1}
-nav a{color:var(--muted);text-decoration:none;font-size:14.5px;margin-left:20px}
-nav a:hover{color:var(--accent)}
+/* ── nav ─────────────────────────────────────────────── */
+nav{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter:saturate(1.6) blur(14px);
+  -webkit-backdrop-filter:saturate(1.6) blur(14px);
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  border-bottom:1px solid transparent; transition:border-color .3s;
+}
+nav.scrolled{border-bottom-color:var(--line)}
+nav .inner{display:flex; align-items:center; gap:14px; height:66px}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:600; letter-spacing:-.015em}
+.brand .glyph{font-size:20px; line-height:1}
+nav .sp{flex:1}
+nav a.lnk{color:var(--muted); text-decoration:none; font-size:14.5px; margin-left:22px; transition:color .2s}
+nav a.lnk:hover{color:var(--ink)}
+.exit{
+  font:inherit; font-size:13px; font-weight:500; cursor:pointer;
+  color:var(--muted); background:transparent;
+  border:1px solid var(--line); border-radius:999px;
+  padding:6px 13px; margin-left:22px; transition:.2s;
+}
+.exit:hover{border-color:var(--rose); color:var(--rose)}
 
-.hero{padding:48px 0 20px;text-align:center}
-.hero .mark{font-size:56px;line-height:1}
-h1{font-size:clamp(32px,5.4vw,50px);line-height:1.1;letter-spacing:-.03em;
- margin:18px 0 14px;max-width:16ch;margin-inline:auto}
-.lede{color:var(--muted);font-size:clamp(16px,2.1vw,19px);max-width:52ch;
- margin:0 auto 10px}
-.note{color:var(--muted);font-size:13.5px;margin-top:26px}
+/* ── type ────────────────────────────────────────────── */
+h1,h2,h3{font-family:var(--serif); font-weight:400; letter-spacing:-.02em; line-height:1.12}
+h1{font-size:clamp(2.6rem,6.4vw,4.5rem); margin:0 0 .5em; max-width:15ch}
+h2{font-size:clamp(1.9rem,3.6vw,2.7rem); margin:0 0 .45em; max-width:20ch}
+h3{font-family:var(--sans); font-size:1.02rem; font-weight:600; letter-spacing:-.01em; margin:0 0 .35em}
+p{margin:0 0 1.1em; max-width:var(--measure); color:var(--ink-2)}
+.lede{font-size:clamp(1.08rem,1.9vw,1.28rem); color:var(--muted); line-height:1.6}
+.eyebrow{
+  font-size:11.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--violet); margin:0 0 1.1em;
+}
 
-.shots{display:flex;gap:16px;overflow-x:auto;padding:36px 4px 12px;
- scroll-snap-type:x mandatory}
-.shots img{width:216px;flex:0 0 auto;border-radius:18px;border:1px solid var(--line);
- box-shadow:0 12px 34px rgba(28,24,48,.13);scroll-snap-align:center;background:#fff}
+/* ── hero ────────────────────────────────────────────── */
+header.hero{position:relative; padding:clamp(64px,11vw,132px) 0 0; overflow:hidden}
+header.hero::before{
+  content:""; position:absolute; inset:-30% 0 auto -10%; height:70vh; z-index:-1;
+  background:
+    radial-gradient(46% 52% at 22% 26%, color-mix(in srgb,var(--violet) 16%,transparent) 0%, transparent 70%),
+    radial-gradient(38% 42% at 82% 8%, color-mix(in srgb,var(--rose) 11%,transparent) 0%, transparent 70%);
+  filter:blur(14px);
+}
+.hero .lede{max-width:31rem}
+.meta{margin-top:2rem; font-size:13.5px; color:var(--muted); display:flex; gap:18px; flex-wrap:wrap}
+.meta span{display:inline-flex; align-items:center; gap:7px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--sage)}
 
-h2{font-size:clamp(22px,3vw,28px);letter-spacing:-.02em;margin:0 0 8px}
-section{padding:52px 0;border-top:1px solid var(--line)}
-.sub{color:var(--muted);margin:0 0 26px;max-width:56ch}
+/* ── device gallery ──────────────────────────────────── */
+.gallery{
+  display:flex; gap:clamp(14px,2.4vw,26px); margin-top:clamp(48px,7vw,84px);
+  padding:8px 0 26px; overflow-x:auto; scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+}
+.gallery::-webkit-scrollbar{display:none}
+.shot{flex:0 0 auto; width:clamp(200px,23vw,258px); scroll-snap-align:center}
+.shot img{
+  display:block; width:100%; border-radius:26px;
+  border:1px solid var(--line); background:var(--card);
+  box-shadow:var(--shadow);
+}
+.shot figcaption{margin-top:14px; font-size:13px; color:var(--muted); line-height:1.5; max-width:24ch}
 
-.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
-.card h3{margin:0 0 6px;font-size:16.5px}
-.card p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6}
-.card .ic{font-size:22px;display:block;margin-bottom:10px}
+/* ── sections ────────────────────────────────────────── */
+section{padding:clamp(64px,9vw,116px) 0}
+.rule{border:0; border-top:1px solid var(--line); margin:0}
+.pull{
+  font-family:var(--serif); font-size:clamp(1.35rem,2.9vw,2rem); line-height:1.35;
+  color:var(--ink); max-width:26ch; margin:0;
+}
+.two{display:grid; gap:clamp(28px,5vw,64px); grid-template-columns:1fr}
+@media(min-width:840px){.two{grid-template-columns:0.95fr 1.05fr; align-items:start}}
 
-.tiers{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
-.tier{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-.tier.free{border-color:var(--sage)}
-.tier .t{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
- color:var(--accent);margin-bottom:6px}
-.tier.free .t{color:var(--sage)}
-.tier p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.6}
+.grid{display:grid; gap:1px; background:var(--line); border:1px solid var(--line);
+  border-radius:18px; overflow:hidden; grid-template-columns:1fr}
+@media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+@media(min-width:980px){.grid{grid-template-columns:repeat(3,1fr)}}
+.cell{background:var(--card); padding:clamp(22px,3vw,30px)}
+.cell p{margin:0; font-size:14.6px; color:var(--muted); max-width:30ch}
+.cell .ic{
+  display:grid; place-items:center; width:38px; height:38px; margin-bottom:16px;
+  border-radius:11px; background:var(--violet-soft); font-size:18px;
+}
 
-.safety{background:var(--accent-soft);border:1px solid #d9cffa;border-radius:14px;
- padding:22px 24px;margin-top:8px}
-.safety h3{margin:0 0 8px;font-size:16.5px}
-.safety p{margin:0 0 8px;font-size:14.5px;color:#463a6b;line-height:1.6}
+/* privacy panel */
+.panel{
+  background:var(--bg-2); border:1px solid var(--line);
+  border-radius:22px; padding:clamp(28px,5vw,56px);
+}
+.panel h2{margin-bottom:.5em}
+.list{list-style:none; padding:0; margin:2rem 0 0; display:grid; gap:1.35rem}
+@media(min-width:760px){.list{grid-template-columns:1fr 1fr; gap:2rem 3rem}}
+.list li{display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:start}
+.list .k{
+  width:26px;height:26px;border-radius:8px;display:grid;place-items:center;
+  background:color-mix(in srgb,var(--sage) 16%,transparent); color:var(--sage);
+  font-size:13px; font-weight:700;
+}
+.list p{margin:.25em 0 0; font-size:14.4px}
+
+/* plans */
+.plans{display:grid; gap:14px; grid-template-columns:1fr}
+@media(min-width:620px){.plans{grid-template-columns:1fr 1fr}}
+@media(min-width:960px){.plans{grid-template-columns:repeat(4,1fr)}}
+.plan{
+  border:1px solid var(--line); border-radius:16px; padding:22px 22px 24px;
+  background:var(--card); display:flex; flex-direction:column; gap:8px;
+}
+.plan.trial{border-color:color-mix(in srgb,var(--sage) 45%,var(--line))}
+.plan .name{font-weight:600; font-size:14.5px; letter-spacing:-.01em}
+.plan.trial .name{color:var(--sage)}
+.plan p{margin:0; font-size:14px; color:var(--muted)}
+
+/* safety */
+.safety{
+  border-left:3px solid var(--rose); background:var(--card);
+  border-radius:0 16px 16px 0; padding:24px 26px; margin-top:2.5rem;
+  box-shadow:var(--shadow);
+}
+.safety h3{color:var(--rose)}
+.safety p{font-size:14.6px; margin-bottom:.6em}
 .safety p:last-child{margin:0}
 
-footer{border-top:1px solid var(--line);padding:30px 0 60px;color:var(--muted);font-size:14px}
-footer a{margin-right:18px}
-.disc{margin-top:14px;font-size:13px;line-height:1.6;max-width:70ch}
+footer{border-top:1px solid var(--line); padding:44px 0 72px; color:var(--muted); font-size:14px}
+footer .fl{display:flex; gap:22px; flex-wrap:wrap; margin-bottom:22px}
+footer a{text-decoration:none; transition:color .2s}
+footer a:hover{color:var(--violet)}
+.fine{font-size:12.6px; line-height:1.65; max-width:64ch; color:var(--muted)}
 
-@media (prefers-color-scheme:dark){
- :root{--ink:#ece9f6;--muted:#a49dbd;--line:#2f2947;--bg:#131020;--card:#1c1730;
-  --accent:#a894ff;--accent-soft:#221b3d}
- .shots img{box-shadow:0 12px 34px rgba(0,0,0,.5)}
- .safety{border-color:#3a2f63}
- .safety p{color:#c9c1e6}
-}
-</style></head><body>
+/* reveal */
+.rv{opacity:0; transform:translateY(14px); transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1; transform:none; transition:none}}
+:focus-visible{outline:2px solid var(--violet); outline-offset:3px; border-radius:4px}
+</style>
+</head><body>
 
-<div class="wrap">
-<nav>
- <span style="font-size:24px">🌸</span>
- <span class="name">Bloom Again</span>
- <span class="spacer"></span>
- <a href="privacy.html">Privacy</a>
- <a href="support.html">Support</a>
-</nav>
+<nav id="nav"><div class="wrap inner">
+  <a class="brand" href="/"><span class="glyph">🌸</span> Bloom Again</a>
+  <span class="sp"></span>
+  <a class="lnk" href="#what">What it does</a>
+  <a class="lnk" href="#privacy">Privacy</a>
+  <a class="lnk" href="support.html">Support</a>
+  <button class="exit" id="exit" title="Leaves this site immediately (Esc)">Quick exit</button>
+</div></nav>
 
-<header class="hero">
- <div class="mark">🌸</div>
- <h1>You are not imagining it.</h1>
- <p class="lede">A private space to document what happened, recognise the
- patterns behind it, and rebuild at your own pace.</p>
- <p class="note">iPhone and iPad · English, हिन्दी, తెలుగు</p>
-</header>
+<header class="hero"><div class="wrap">
+  <p class="eyebrow rv">For iPhone and iPad</p>
+  <h1 class="rv">A record of what actually happened.</h1>
+  <p class="lede rv">When someone rewrites events for long enough, you start to
+  doubt your own memory. Bloom Again is a private place to put the facts down
+  while they are still clear — and to see the shape of them over time.</p>
+  <div class="meta rv">
+    <span><i class="dot"></i> Encrypted on your device</span>
+    <span><i class="dot"></i> Works without an account</span>
+    <span><i class="dot"></i> English · हिन्दी · తెలుగు</span>
+  </div>
 
-<div class="shots">
- <img src="img/01-ai-pattern-detection.png" alt="Pattern analysis of a logged incident" loading="lazy">
- <img src="img/03-incident-log.png" alt="The incident log" loading="lazy">
- <img src="img/07-ai-coach.png" alt="The AI coach" loading="lazy">
- <img src="img/06-recovery-tools.png" alt="Recovery tools" loading="lazy">
-</div>
-</div>
+  <div class="gallery">
+    <figure class="shot rv"><img src="img/01-ai-pattern-detection.png" alt="Logging an incident, with a pattern named alongside it" loading="lazy" decoding="async">
+      <figcaption>Write it down in a minute. The pattern is named as you type.</figcaption></figure>
+    <figure class="shot rv"><img src="img/03-incident-log.png" alt="The incident log over time" loading="lazy" decoding="async">
+      <figcaption>Dated, searchable, and yours alone.</figcaption></figure>
+    <figure class="shot rv"><img src="img/07-ai-coach.png" alt="The AI coach" loading="lazy" decoding="async">
+      <figcaption>Ask at 2am what you cannot ask anyone else.</figcaption></figure>
+    <figure class="shot rv"><img src="img/06-recovery-tools.png" alt="Recovery tools" loading="lazy" decoding="async">
+      <figcaption>Grounding for the moments thinking clearly is not an option.</figcaption></figure>
+  </div>
+</div></header>
 
-<div class="wrap">
-<section>
- <h2>What it does</h2>
- <p class="sub">Built around one idea: that a clear record of what actually
- happened is the thing coercive control works hardest to take away.</p>
- <div class="grid">
-  <div class="card"><span class="ic">📓</span>
-   <h3>Incident log</h3>
-   <p>Write down what happened while you still remember it clearly. Dated,
-   searchable, and yours.</p></div>
-  <div class="card"><span class="ic">🔍</span>
-   <h3>Pattern recognition</h3>
-   <p>Analysis of a conversation or an incident, naming the tactics it is
-   consistent with — and what you could say back.</p></div>
-  <div class="card"><span class="ic">📚</span>
-   <h3>The Codex</h3>
-   <p>236 documented tactics across 20 dimensions, cross-referenced from
-   what you log, so a pattern has a name and a shape.</p></div>
-  <div class="card"><span class="ic">🔐</span>
-   <h3>Evidence vault</h3>
-   <p>Photos, documents and voice notes, encrypted on your device before
-   they are stored.</p></div>
-  <div class="card"><span class="ic">🌿</span>
-   <h3>Recovery tools</h3>
-   <p>Grounding and breathing for the moments when thinking clearly is not
-   an option. Mood check-ins, rituals, and a streak that asks nothing.</p></div>
-  <div class="card"><span class="ic">⚖️</span>
-   <h3>Preparing to leave</h3>
-   <p>Documents, financial groundwork and legal steps, laid out in order,
-   for whenever that day comes — or does not.</p></div>
- </div>
-</section>
+<hr class="rule">
 
-<section>
- <h2>Privacy is the product</h2>
- <p class="sub">The people this app is for are often being watched. That
- shaped how it was built, not just what it says.</p>
- <div class="grid">
-  <div class="card"><span class="ic">🔑</span>
-   <h3>Encrypted before it leaves</h3>
-   <p>Journal entries, incidents and vault files are encrypted on your
-   device. Add a passphrase and a new phone can open them; without it, the
-   key never leaves this one.</p></div>
-  <div class="card"><span class="ic">🕶️</span>
-   <h3>No browser history</h3>
-   <p>Links open inside the app rather than in Safari, so reading a legal-aid
-   or helpline page leaves nothing behind on the device.</p></div>
-  <div class="card"><span class="ic">🚪</span>
-   <h3>Start without an account</h3>
-   <p>Continue privately with no email at all. Add one later if you want
-   your entries to survive a new phone.</p></div>
- </div>
-</section>
+<section id="what"><div class="wrap">
+  <div class="two">
+    <div>
+      <p class="eyebrow rv">What it does</p>
+      <p class="pull rv">A clear record is the first thing coercive control takes,
+      and the hardest thing to rebuild without help.</p>
+    </div>
+    <div class="rv">
+      <p>Bloom Again does three things: it holds what happened, it explains the
+      patterns behind it, and it gives you somewhere to steady yourself when the
+      day gets away from you.</p>
+      <p>None of it is a diagnosis. The app names behaviours, never people, and
+      it says so plainly wherever it speaks.</p>
+    </div>
+  </div>
 
-<section>
- <h2>Plans</h2>
- <p class="sub">Every new account gets two days of everything, including ten
- AI requests, before choosing anything.</p>
- <div class="tiers">
-  <div class="tier free"><div class="t">Trial</div>
-   <p>Two days, all features, 10 AI requests. No card.</p></div>
-  <div class="tier"><div class="t">Standard</div>
-   <p>Logging, the Codex, recovery tools and the vault.</p></div>
-  <div class="tier"><div class="t">Premium</div>
-   <p>Adds deeper pattern analysis and insight over time.</p></div>
-  <div class="tier"><div class="t">Pro Max</div>
-   <p>Everything, including the AI coach and preparation tools.</p></div>
- </div>
+  <div class="grid rv" style="margin-top:clamp(36px,5vw,60px)">
+    <div class="cell"><div class="ic">📓</div><h3>Incident log</h3>
+      <p>What was said, how it landed, how severe. Attach a photo, recording or document — location data is stripped automatically.</p></div>
+    <div class="cell"><div class="ic">🔍</div><h3>Pattern recognition</h3>
+      <p>Gaslighting, financial control, blame shifting, triangulation — named as you write, with what you could say back.</p></div>
+    <div class="cell"><div class="ic">📚</div><h3>The Codex</h3>
+      <p>236 documented tactics across 20 dimensions, cross-referenced from your own entries.</p></div>
+    <div class="cell"><div class="ic">🔐</div><h3>Evidence vault</h3>
+      <p>Photos, documents and voice notes, encrypted on your device before they are stored.</p></div>
+    <div class="cell"><div class="ic">🌿</div><h3>Recovery tools</h3>
+      <p>Grounding and breathing, mood check-ins, daily rituals, and a streak that asks nothing of you.</p></div>
+    <div class="cell"><div class="ic">⚖️</div><h3>Preparing to leave</h3>
+      <p>Documents, financial groundwork and legal steps in order — for whenever that day comes, or does not.</p></div>
+  </div>
+</div></section>
 
- <div class="safety">
-  <h3>If you are in danger</h3>
-  <p>Bloom Again is a documentation and self-support tool. It is not therapy,
-  not medical or legal advice, and not an emergency service. It never
-  contacts anyone on your behalf.</p>
-  <p>If you are in immediate danger, contact your local emergency number.</p>
- </div>
-</section>
-</div>
+<section id="privacy"><div class="wrap"><div class="panel rv">
+  <p class="eyebrow">Privacy is the product</p>
+  <h2>Built for someone who may be watched.</h2>
+  <p>That shaped the engineering, not only the wording. Three decisions matter
+  more than the rest.</p>
 
-<div class="wrap"><footer>
- <a href="privacy.html">Privacy Policy</a>
- <a href="support.html">Support</a>
- <a href="mailto:support@bloomagain.app">support@bloomagain.app</a>
- <p class="disc">Bloom Again by Solvixalabs. Analysis in this app describes
- patterns consistent with documented behaviours; it does not diagnose anyone,
- and it is not a substitute for professional advice. Health features are for
- personal wellness awareness only and are not medical measurements.</p>
-</footer></div>
+  <ul class="list">
+    <li><span class="k">1</span><div><h3>Encrypted before it leaves</h3>
+      <p>Entries and vault files are encrypted on your device. Add a passphrase and a recovery code, and a new phone can open them too.</p></div></li>
+    <li><span class="k">2</span><div><h3>Nothing in your browser history</h3>
+      <p>Links open inside the app, so reading a legal-aid or helpline page leaves no trace on the device — the kind that outlives uninstalling.</p></div></li>
+    <li><span class="k">3</span><div><h3>Start with no account at all</h3>
+      <p>Continue privately, with no email. Add one later if you want your entries to survive a new phone.</p></div></li>
+    <li><span class="k">4</span><div><h3>Off until you say otherwise</h3>
+      <p>Analytics, crash reporting, health and voice are each disabled until you turn them on. Export or delete everything, permanently.</p></div></li>
+  </ul>
+</div></div></section>
 
+<section><div class="wrap">
+  <p class="eyebrow rv">Plans</p>
+  <h2 class="rv">Two days of everything, before you decide anything.</h2>
+  <p class="lede rv" style="margin-bottom:2.2rem">Every new account starts with a full trial, including ten AI requests. No card.</p>
+  <div class="plans rv">
+    <div class="plan trial"><span class="name">Trial</span><p>Two days, all features, 10 AI requests.</p></div>
+    <div class="plan"><span class="name">Standard</span><p>Logging, the Codex, recovery tools and the vault.</p></div>
+    <div class="plan"><span class="name">Premium</span><p>Adds deeper pattern analysis and insight over time.</p></div>
+    <div class="plan"><span class="name">Pro Max</span><p>Everything, including the AI coach and preparation tools.</p></div>
+  </div>
+
+  <div class="safety rv">
+    <h3>If you are in danger</h3>
+    <p>Bloom Again is a documentation and self-support tool. It is not therapy,
+    not medical or legal advice, and not an emergency service, and it never
+    contacts anyone on your behalf.</p>
+    <p>If you are in immediate danger, contact your local emergency number.</p>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="fl">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="support.html">Support</a>
+    <a href="mailto:support@bloomagain.app">support@bloomagain.app</a>
+  </div>
+  <p class="fine">Bloom Again by Solvixalabs. Analysis in this app describes
+  patterns consistent with documented behaviours; it does not diagnose anyone,
+  and it is not a substitute for professional advice. Health features are for
+  personal wellness awareness only and are not medical measurements.</p>
+</div></footer>
+
+<script>
+// Reveal on scroll. Everything is visible without JS -- the class is only
+// added once the observer is known to work, so a failure shows the page
+// rather than hiding it.
+(function () {
+  var els = document.querySelectorAll('.rv');
+  if (!('IntersectionObserver' in window) ||
+      matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+  els.forEach(function (el, i) {
+    el.style.transitionDelay = Math.min(i % 4, 3) * 60 + 'ms';
+    io.observe(el);
+  });
+})();
+
+// Hairline under the nav only once the page has moved.
+(function () {
+  var nav = document.getElementById('nav');
+  var onScroll = function () { nav.classList.toggle('scrolled', scrollY > 8); };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+// Quick exit. Standard on sites read by people whose device may be checked:
+// leave immediately, and try not to leave this page in session history.
+(function () {
+  var go = function () { location.replace('https://www.google.com/'); };
+  document.getElementById('exit').addEventListener('click', go);
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') go(); });
+})();
+</script>
 </body></html>
