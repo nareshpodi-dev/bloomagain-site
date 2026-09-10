@@ -34,7 +34,7 @@
 html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
-  margin:0; background:var(--bg); color:var(--ink);
+  margin:0; background:var(--bg); color:var(--ink); overflow-x:hidden;
   font-family:var(--sans); font-size:17px; line-height:1.65;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
@@ -63,6 +63,13 @@ nav a.lnk:hover{color:var(--ink)}
   padding:6px 13px; margin-left:22px; transition:.2s;
 }
 .exit:hover{border-color:var(--rose); color:var(--rose)}
+/* Below ~640px the section links plus the exit button no longer fit the bar
+   and push the whole document sideways. The exit button is the one control
+   that must survive at every width, so the links go and it stays. */
+@media(max-width:640px){
+  nav a.lnk{display:none}
+  .exit{margin-left:auto}
+}
 
 /* ── type ────────────────────────────────────────────── */
 h1,h2,h3{font-family:var(--serif); font-weight:400; letter-spacing:-.02em; line-height:1.12}
