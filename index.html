@@ -1,20 +1,188 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
+<html lang="en"><head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Bloom Again</title>
+<meta name="description" content="A private space to document, understand and recover from an emotionally abusive relationship.">
 <style>
-body{margin:0;background:#fbfaff;color:#1c1830;display:grid;place-items:center;
- min-height:100vh;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-.c{text-align:center;padding:24px}
-h1{font-size:30px;margin:14px 0 6px;letter-spacing:-.02em}
-p{color:#5b5570;max-width:38ch;margin:0 auto 22px}
-a{display:inline-block;margin:0 8px;color:#5b3fd6;font-weight:600}
-@media (prefers-color-scheme:dark){body{background:#141021;color:#ece9f6}
- p{color:#a49dbd}a{color:#a894ff}}
-</style></head><body><div class="c">
-<div style="font-size:44px">&#127800;</div>
-<h1>Bloom Again</h1>
-<p>A private space to document, understand and recover from an emotionally
-abusive relationship.</p>
-<a href="privacy.html">Privacy Policy</a><a href="support.html">Support</a>
-</div></body></html>
+:root{
+ --ink:#1c1830;--muted:#5b5570;--line:#e6e2f0;--bg:#fbfaff;--card:#fff;
+ --accent:#5b3fd6;--accent-soft:#efeafc;--sage:#3f9d7a;--amber:#d99a2b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+ -webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+a{color:var(--accent)}
+
+nav{display:flex;align-items:center;gap:10px;padding:26px 0}
+nav .name{font-weight:700;font-size:18px;letter-spacing:-.01em}
+nav .spacer{flex:1}
+nav a{color:var(--muted);text-decoration:none;font-size:14.5px;margin-left:20px}
+nav a:hover{color:var(--accent)}
+
+.hero{padding:48px 0 20px;text-align:center}
+.hero .mark{font-size:56px;line-height:1}
+h1{font-size:clamp(32px,5.4vw,50px);line-height:1.1;letter-spacing:-.03em;
+ margin:18px 0 14px;max-width:16ch;margin-inline:auto}
+.lede{color:var(--muted);font-size:clamp(16px,2.1vw,19px);max-width:52ch;
+ margin:0 auto 10px}
+.note{color:var(--muted);font-size:13.5px;margin-top:26px}
+
+.shots{display:flex;gap:16px;overflow-x:auto;padding:36px 4px 12px;
+ scroll-snap-type:x mandatory}
+.shots img{width:216px;flex:0 0 auto;border-radius:18px;border:1px solid var(--line);
+ box-shadow:0 12px 34px rgba(28,24,48,.13);scroll-snap-align:center;background:#fff}
+
+h2{font-size:clamp(22px,3vw,28px);letter-spacing:-.02em;margin:0 0 8px}
+section{padding:52px 0;border-top:1px solid var(--line)}
+.sub{color:var(--muted);margin:0 0 26px;max-width:56ch}
+
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.card h3{margin:0 0 6px;font-size:16.5px}
+.card p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6}
+.card .ic{font-size:22px;display:block;margin-bottom:10px}
+
+.tiers{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.tier.free{border-color:var(--sage)}
+.tier .t{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+ color:var(--accent);margin-bottom:6px}
+.tier.free .t{color:var(--sage)}
+.tier p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.6}
+
+.safety{background:var(--accent-soft);border:1px solid #d9cffa;border-radius:14px;
+ padding:22px 24px;margin-top:8px}
+.safety h3{margin:0 0 8px;font-size:16.5px}
+.safety p{margin:0 0 8px;font-size:14.5px;color:#463a6b;line-height:1.6}
+.safety p:last-child{margin:0}
+
+footer{border-top:1px solid var(--line);padding:30px 0 60px;color:var(--muted);font-size:14px}
+footer a{margin-right:18px}
+.disc{margin-top:14px;font-size:13px;line-height:1.6;max-width:70ch}
+
+@media (prefers-color-scheme:dark){
+ :root{--ink:#ece9f6;--muted:#a49dbd;--line:#2f2947;--bg:#131020;--card:#1c1730;
+  --accent:#a894ff;--accent-soft:#221b3d}
+ .shots img{box-shadow:0 12px 34px rgba(0,0,0,.5)}
+ .safety{border-color:#3a2f63}
+ .safety p{color:#c9c1e6}
+}
+</style></head><body>
+
+<div class="wrap">
+<nav>
+ <span style="font-size:24px">🌸</span>
+ <span class="name">Bloom Again</span>
+ <span class="spacer"></span>
+ <a href="privacy.html">Privacy</a>
+ <a href="support.html">Support</a>
+</nav>
+
+<header class="hero">
+ <div class="mark">🌸</div>
+ <h1>You are not imagining it.</h1>
+ <p class="lede">A private space to document what happened, recognise the
+ patterns behind it, and rebuild at your own pace.</p>
+ <p class="note">iPhone and iPad · English, हिन्दी, తెలుగు</p>
+</header>
+
+<div class="shots">
+ <img src="img/01-ai-pattern-detection.png" alt="Pattern analysis of a logged incident" loading="lazy">
+ <img src="img/03-incident-log.png" alt="The incident log" loading="lazy">
+ <img src="img/07-ai-coach.png" alt="The AI coach" loading="lazy">
+ <img src="img/06-recovery-tools.png" alt="Recovery tools" loading="lazy">
+</div>
+</div>
+
+<div class="wrap">
+<section>
+ <h2>What it does</h2>
+ <p class="sub">Built around one idea: that a clear record of what actually
+ happened is the thing coercive control works hardest to take away.</p>
+ <div class="grid">
+  <div class="card"><span class="ic">📓</span>
+   <h3>Incident log</h3>
+   <p>Write down what happened while you still remember it clearly. Dated,
+   searchable, and yours.</p></div>
+  <div class="card"><span class="ic">🔍</span>
+   <h3>Pattern recognition</h3>
+   <p>Analysis of a conversation or an incident, naming the tactics it is
+   consistent with — and what you could say back.</p></div>
+  <div class="card"><span class="ic">📚</span>
+   <h3>The Codex</h3>
+   <p>236 documented tactics across 20 dimensions, cross-referenced from
+   what you log, so a pattern has a name and a shape.</p></div>
+  <div class="card"><span class="ic">🔐</span>
+   <h3>Evidence vault</h3>
+   <p>Photos, documents and voice notes, encrypted on your device before
+   they are stored.</p></div>
+  <div class="card"><span class="ic">🌿</span>
+   <h3>Recovery tools</h3>
+   <p>Grounding and breathing for the moments when thinking clearly is not
+   an option. Mood check-ins, rituals, and a streak that asks nothing.</p></div>
+  <div class="card"><span class="ic">⚖️</span>
+   <h3>Preparing to leave</h3>
+   <p>Documents, financial groundwork and legal steps, laid out in order,
+   for whenever that day comes — or does not.</p></div>
+ </div>
+</section>
+
+<section>
+ <h2>Privacy is the product</h2>
+ <p class="sub">The people this app is for are often being watched. That
+ shaped how it was built, not just what it says.</p>
+ <div class="grid">
+  <div class="card"><span class="ic">🔑</span>
+   <h3>Encrypted before it leaves</h3>
+   <p>Journal entries, incidents and vault files are encrypted on your
+   device. Add a passphrase and a new phone can open them; without it, the
+   key never leaves this one.</p></div>
+  <div class="card"><span class="ic">🕶️</span>
+   <h3>No browser history</h3>
+   <p>Links open inside the app rather than in Safari, so reading a legal-aid
+   or helpline page leaves nothing behind on the device.</p></div>
+  <div class="card"><span class="ic">🚪</span>
+   <h3>Start without an account</h3>
+   <p>Continue privately with no email at all. Add one later if you want
+   your entries to survive a new phone.</p></div>
+ </div>
+</section>
+
+<section>
+ <h2>Plans</h2>
+ <p class="sub">Every new account gets two days of everything, including ten
+ AI requests, before choosing anything.</p>
+ <div class="tiers">
+  <div class="tier free"><div class="t">Trial</div>
+   <p>Two days, all features, 10 AI requests. No card.</p></div>
+  <div class="tier"><div class="t">Standard</div>
+   <p>Logging, the Codex, recovery tools and the vault.</p></div>
+  <div class="tier"><div class="t">Premium</div>
+   <p>Adds deeper pattern analysis and insight over time.</p></div>
+  <div class="tier"><div class="t">Pro Max</div>
+   <p>Everything, including the AI coach and preparation tools.</p></div>
+ </div>
+
+ <div class="safety">
+  <h3>If you are in danger</h3>
+  <p>Bloom Again is a documentation and self-support tool. It is not therapy,
+  not medical or legal advice, and not an emergency service. It never
+  contacts anyone on your behalf.</p>
+  <p>If you are in immediate danger, contact your local emergency number.</p>
+ </div>
+</section>
+</div>
+
+<div class="wrap"><footer>
+ <a href="privacy.html">Privacy Policy</a>
+ <a href="support.html">Support</a>
+ <a href="mailto:support@bloomagain.app">support@bloomagain.app</a>
+ <p class="disc">Bloom Again by Solvixalabs. Analysis in this app describes
+ patterns consistent with documented behaviours; it does not diagnose anyone,
+ and it is not a substitute for professional advice. Health features are for
+ personal wellness awareness only and are not medical measurements.</p>
+</footer></div>
+
+</body></html>
