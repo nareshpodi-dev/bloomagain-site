@@ -3,10 +3,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Bloom Again — a private record of what actually happened</title>
-<meta name="description" content="A private space to document, understand and recover from an emotionally abusive relationship. Encrypted on your device. iPhone and iPad.">
-<meta property="og:title" content="Bloom Again">
-<meta property="og:description" content="A private record of what actually happened.">
-<meta name="theme-color" content="#17132b">
+<meta name="description" content="A private space to document, understand and recover from an emotionally abusive or controlling relationship. Encrypted on your device. Free on iPhone and iPad.">
+<link rel="canonical" href="https://bloomagain.app/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bloomagain.app/">
+<meta property="og:site_name" content="Bloom Again">
+<meta property="og:title" content="Bloom Again — a record of what actually happened">
+<meta property="og:description" content="A private place to put the facts down while they are still clear, and to see the shape of them over time. Encrypted on your device.">
+<meta property="og:image" content="https://bloomagain.app/img/social-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Bloom Again app icon beside the words: a record of what actually happened.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bloom Again — a record of what actually happened">
+<meta name="twitter:description" content="A private place to put the facts down while they are still clear. Encrypted on your device.">
+<meta name="twitter:image" content="https://bloomagain.app/img/social-card.jpg">
+
+<!-- Safari on iOS offers "Open in App Store" from this, which is the shortest
+     path from a link someone was sent to the thing it is about. -->
+<meta name="apple-itunes-app" content="app-id=6793663067">
+
+<link rel="icon" href="img/icon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="img/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#fcfbfa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#120f22" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -83,6 +106,43 @@ p{margin:0 0 1.1em; max-width:var(--measure); color:var(--ink-2)}
   color:var(--violet); margin:0 0 1.1em;
 }
 
+/* ── buttons ─────────────────────────────────────────── */
+.cta{display:flex; flex-wrap:wrap; align-items:center; gap:14px 18px; margin-top:2.2rem}
+.btn{
+  display:inline-flex; align-items:center; gap:9px;
+  font:inherit; font-size:15px; font-weight:600; letter-spacing:-.01em;
+  text-decoration:none; border-radius:999px; padding:13px 24px;
+  border:1px solid transparent; transition:transform .2s, box-shadow .2s, background .2s;
+}
+.btn svg{width:17px; height:17px; flex:none}
+.btn-primary{background:var(--violet); color:#fff; box-shadow:0 8px 24px -10px var(--violet)}
+.btn-primary:hover{transform:translateY(-1px); box-shadow:0 12px 30px -10px var(--violet)}
+@media (prefers-color-scheme:dark){.btn-primary{color:#151029}}
+.btn-ghost{border-color:var(--line); color:var(--ink-2); background:var(--card)}
+.btn-ghost:hover{border-color:var(--violet); color:var(--violet)}
+@media (prefers-reduced-motion:reduce){.btn{transition:none} .btn-primary:hover{transform:none}}
+.cta .note{font-size:13.5px; color:var(--muted); max-width:30ch}
+/* At phone width a pill with an icon and five words wraps mid-phrase around
+   the icon; full-width centred buttons read better than a ragged pill. */
+@media(max-width:480px){
+  .cta{gap:10px}
+  .cta .btn{width:100%; justify-content:center}
+  .cta .note{max-width:none; margin-top:.4rem}
+}
+
+/* closing download band */
+.band{
+  background:var(--bg-2); border:1px solid var(--line); border-radius:22px;
+  padding:clamp(34px,5vw,60px); text-align:center;
+}
+.band h2{margin-inline:auto; max-width:18ch}
+.band p{margin-inline:auto}
+.band .cta{justify-content:center}
+.band .icon{
+  width:74px; height:74px; border-radius:18px; display:block;
+  margin:0 auto 22px; box-shadow:var(--shadow);
+}
+
 /* ── hero ────────────────────────────────────────────── */
 header.hero{position:relative; padding:clamp(64px,11vw,132px) 0 0; overflow:hidden}
 header.hero::before{
@@ -106,7 +166,10 @@ header.hero::before{
 .gallery::-webkit-scrollbar{display:none}
 .shot{flex:0 0 auto; width:clamp(200px,23vw,258px); scroll-snap-align:center}
 .shot img{
-  display:block; width:100%; border-radius:26px;
+  /* width/height attributes carry the aspect ratio so the gallery does not
+     reflow when the shots load; height:auto keeps them from being used as
+     a literal pixel height. */
+  display:block; width:100%; height:auto; border-radius:26px;
   border:1px solid var(--line); background:var(--card);
   box-shadow:var(--shadow);
 }
@@ -184,6 +247,28 @@ footer a:hover{color:var(--violet)}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1; transform:none; transition:none}}
 :focus-visible{outline:2px solid var(--violet); outline-offset:3px; border-radius:4px}
 </style>
+<noscript><style>.rv{opacity:1; transform:none}</style></noscript>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Bloom Again",
+  "url": "https://bloomagain.app/",
+  "installUrl": "https://apps.apple.com/app/id6793663067",
+  "image": "https://bloomagain.app/img/icon-512.png",
+  "description": "A private space to document, understand and recover from an emotionally abusive or controlling relationship. Entries are encrypted on your device.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "iOS 15.6 or later",
+  "inLanguage": ["en", "hi", "te"],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "Free to download, with a two-day trial of every feature and optional subscriptions."
+  }
+}
+</script>
 </head><body>
 
 <nav id="nav"><div class="wrap inner">
@@ -192,6 +277,7 @@ footer a:hover{color:var(--violet)}
   <a class="lnk" href="#what">What it does</a>
   <a class="lnk" href="#privacy">Privacy</a>
   <a class="lnk" href="support.html">Support</a>
+  <a class="lnk" href="https://apps.apple.com/app/id6793663067">Download</a>
   <button class="exit" id="exit" title="Leaves this site immediately (Esc)">Quick exit</button>
 </div></nav>
 
@@ -207,14 +293,22 @@ footer a:hover{color:var(--violet)}
     <span><i class="dot"></i> English · हिन्दी · తెలుగు</span>
   </div>
 
-  <div class="gallery">
-    <figure class="shot rv"><img src="img/01-ai-pattern-detection.png" alt="Logging an incident, with a pattern named alongside it" loading="lazy" decoding="async">
+  <div class="cta rv">
+    <a class="btn btn-primary" href="https://apps.apple.com/app/id6793663067">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7 2-1.1 2.8-2.2c.9-1.2 1.2-2.4 1.2-2.5 0 0-2.4-.9-2.4-3.6zM14.2 5.9c.6-.8 1-1.9.9-3-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-.9 2.9 1 .1 2-.5 2.7-1.3z"/></svg> Download on the App Store</a>
+    <a class="btn btn-ghost" href="#what">See what it does</a>
+    <p class="note">Free to download. Two days of everything before you decide anything.</p>
+  </div>
+
+  <div class="gallery" tabindex="0" role="region"
+       aria-label="Screenshots of Bloom Again, scrollable sideways">
+    <figure class="shot rv"><img src="img/01-ai-pattern-detection.png" alt="Logging an incident, with a pattern named alongside it" width="416" height="900" loading="lazy" decoding="async">
       <figcaption>Write it down in a minute. The pattern is named as you type.</figcaption></figure>
-    <figure class="shot rv"><img src="img/03-incident-log.png" alt="The incident log over time" loading="lazy" decoding="async">
+    <figure class="shot rv"><img src="img/03-incident-log.png" alt="The incident log over time" width="416" height="900" loading="lazy" decoding="async">
       <figcaption>Dated, searchable, and yours alone.</figcaption></figure>
-    <figure class="shot rv"><img src="img/07-ai-coach.png" alt="The AI coach" loading="lazy" decoding="async">
+    <figure class="shot rv"><img src="img/07-ai-coach.png" alt="The AI coach" width="416" height="900" loading="lazy" decoding="async">
       <figcaption>Ask at 2am what you cannot ask anyone else.</figcaption></figure>
-    <figure class="shot rv"><img src="img/06-recovery-tools.png" alt="Recovery tools" loading="lazy" decoding="async">
+    <figure class="shot rv"><img src="img/06-recovery-tools.png" alt="Recovery tools" width="416" height="900" loading="lazy" decoding="async">
       <figcaption>Grounding for the moments thinking clearly is not an option.</figcaption></figure>
   </div>
 </div></header>
@@ -242,8 +336,8 @@ footer a:hover{color:var(--violet)}
       <p>What was said, how it landed, how severe. Attach a photo, recording or document — location data is stripped automatically.</p></div>
     <div class="cell"><div class="ic">🔍</div><h3>Pattern recognition</h3>
       <p>Gaslighting, financial control, blame shifting, triangulation — named as you write, with what you could say back.</p></div>
-    <div class="cell"><div class="ic">📚</div><h3>The Codex</h3>
-      <p>236 documented tactics across 20 dimensions, cross-referenced from your own entries.</p></div>
+    <div class="cell"><div class="ic">📚</div><h3>The Codex and the Education Hub</h3>
+      <p>236 documented tactics across 20 dimensions, plus 118 plain-language topics on trauma bonding, coercive control and your legal rights.</p></div>
     <div class="cell"><div class="ic">🔐</div><h3>Evidence vault</h3>
       <p>Photos, documents and voice notes, encrypted on your device before they are stored.</p></div>
     <div class="cell"><div class="ic">🌿</div><h3>Recovery tools</h3>
@@ -290,6 +384,21 @@ footer a:hover{color:var(--violet)}
     <p>If you are in immediate danger, contact your local emergency number.</p>
   </div>
 </div></section>
+
+<section id="get"><div class="wrap"><div class="band rv">
+  <img class="icon" src="img/icon-192.png" alt="" width="192" height="192" loading="lazy" decoding="async">
+  <p class="eyebrow">Free on the App Store</p>
+  <h2>Start with one entry.</h2>
+  <p class="lede">You do not need an account, a plan, or a decision about what
+  you are going to do. Write down one thing that happened while you still
+  remember it clearly.</p>
+  <div class="cta">
+    <a class="btn btn-primary" href="https://apps.apple.com/app/id6793663067">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7 2-1.1 2.8-2.2c.9-1.2 1.2-2.4 1.2-2.5 0 0-2.4-.9-2.4-3.6zM14.2 5.9c.6-.8 1-1.9.9-3-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-.9 2.9 1 .1 2-.5 2.7-1.3z"/></svg> Download on the App Store</a>
+  </div>
+  <p class="note" style="margin:1.4rem auto 0; font-size:13.5px; color:var(--muted); max-width:42ch">
+    Requires iOS 15.6 or later. iPhone and iPad. Android is not available yet.</p>
+</div></div></section>
 
 <footer><div class="wrap">
   <div class="fl">
