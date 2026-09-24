@@ -22,112 +22,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-/* Shared with index.html: same tokens, same type pairing. Long-form legal
-   text needs a narrower measure and a plainer rhythm than a landing page,
-   so the scale differs -- the palette and fonts do not. */
-:root{
-  --ink:#191430; --ink-2:#3d3557; --muted:#6b6285;
-  --bg:#fcfbfa; --bg-2:#f4f1f7; --card:#ffffff; --line:#e8e3f0;
-  --violet:#5b3fd6; --violet-soft:#efeafd;
-  --sage:#3f8f72; --rose:#c4547a;
-  --shadow:0 1px 2px rgba(25,20,48,.04), 0 12px 40px -12px rgba(25,20,48,.16);
-  --serif:"Fraunces",Georgia,serif;
-  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-@media (prefers-color-scheme:dark){
-  :root{
-    --ink:#f0edf8; --ink-2:#cdc6e0; --muted:#9a92b4;
-    --bg:#120f22; --bg-2:#191430; --card:#1d1836; --line:#302849;
-    --violet:#b3a1ff; --violet-soft:#241d42;
-    --sage:#6fc4a3; --rose:#f08aa8;
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 18px 50px -14px rgba(0,0,0,.6);
-  }
-}
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{
-  margin:0; background:var(--bg); color:var(--ink); overflow-x:hidden;
-  font-family:var(--sans); font-size:16.5px; line-height:1.72;
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-}
-.wrap{max-width:720px; margin-inline:auto; padding-inline:clamp(20px,5vw,36px)}
-a{color:var(--violet)}
-
-nav{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter:saturate(1.6) blur(14px);
-  -webkit-backdrop-filter:saturate(1.6) blur(14px);
-  background:color-mix(in srgb, var(--bg) 82%, transparent);
-  border-bottom:1px solid transparent; transition:border-color .3s;
-}
-nav.scrolled{border-bottom-color:var(--line)}
-nav .inner{display:flex; align-items:center; height:66px;
-  max-width:720px; margin-inline:auto; padding-inline:clamp(20px,5vw,36px)}
-.brand{display:flex; align-items:center; gap:10px; text-decoration:none;
-  color:var(--ink); font-weight:600; letter-spacing:-.015em}
-.brand .glyph{font-size:20px; line-height:1}
-nav .sp{flex:1}
-nav a.lnk{color:var(--muted); text-decoration:none; font-size:14.5px;
-  margin-left:22px; transition:color .2s}
-nav a.lnk:hover{color:var(--ink)}
-.exit{
-  font:inherit; font-size:13px; font-weight:500; cursor:pointer;
-  color:var(--muted); background:transparent; border:1px solid var(--line);
-  border-radius:999px; padding:6px 13px; margin-left:22px; transition:.2s;
-}
-.exit:hover{border-color:var(--rose); color:var(--rose)}
-@media(max-width:640px){ nav a.lnk{display:none} .exit{margin-left:auto} }
-
-h1,h2{font-family:var(--serif); font-weight:400; letter-spacing:-.02em;
-  line-height:1.15}
-h1{font-size:clamp(2.1rem,5vw,3rem); margin:clamp(36px,6vw,64px) 0 .3em}
-h2{font-size:clamp(1.35rem,2.6vw,1.75rem); margin:2.6em 0 .5em}
-h3{font-family:var(--sans); font-size:1.02rem; font-weight:600;
-  letter-spacing:-.01em; margin:2em 0 .4em}
-h4{font-family:var(--sans); font-size:.9rem; font-weight:600; color:var(--muted);
-  text-transform:uppercase; letter-spacing:.08em; margin:1.8em 0 .5em}
-p,li{color:var(--ink-2)}
-p{margin:0 0 1.15em}
-ul,ol{padding-left:1.25em}
-li{margin-bottom:.45em}
-hr{border:0; border-top:1px solid var(--line); margin:3em 0}
-blockquote{
-  margin:1.8em 0; padding:16px 20px; background:var(--card);
-  border-left:3px solid var(--violet); border-radius:0 12px 12px 0;
-  color:var(--muted); box-shadow:var(--shadow);
-}
-blockquote p:last-child{margin:0}
-code{background:var(--violet-soft); padding:2px 6px; border-radius:5px;
-  font-size:.88em; font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-.tablewrap{overflow-x:auto; margin:1.6em 0; border:1px solid var(--line);
-  border-radius:12px}
-table{border-collapse:collapse; width:100%; font-size:14.4px; background:var(--card)}
-th,td{border-bottom:1px solid var(--line); padding:11px 14px; text-align:left;
-  vertical-align:top; color:var(--ink-2)}
-th{background:var(--bg-2); font-weight:600; color:var(--ink);
-  font-size:13px; letter-spacing:.01em}
-tr:last-child td{border-bottom:0}
-.card{background:var(--card); border:1px solid var(--line); border-radius:16px;
-  padding:22px 26px; margin:1.8em 0; box-shadow:var(--shadow)}
-.card h3{margin-top:0}
-.card p:last-child{margin:0}
-footer{border-top:1px solid var(--line); margin-top:4em; padding:40px 0 72px;
-  color:var(--muted); font-size:14px}
-footer a{text-decoration:none; margin-right:20px}
-:focus-visible{outline:2px solid var(--violet); outline-offset:3px; border-radius:4px}
-</style>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="prose.css">
 </head><body>
 
-<nav id="nav"><div class="inner">
-  <a class="brand" href="/"><span class="glyph">🌸</span> Bloom Again</a>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="site" id="nav"><div class="inner">
+  <a class="brand" href="/"><img src="img/icon-32.png" alt="" width="32" height="32"> Bloom Again</a>
   <span class="sp"></span>
-  <a class="lnk" href="privacy.html">Privacy</a>
+  <a class="lnk" href="/">Home</a>
+  <a class="lnk" href="/#what">What it does</a>
+  <a class="lnk" href="privacy.html" aria-current="page">Privacy</a>
   <a class="lnk" href="support.html">Support</a>
-  <button class="exit" id="exit" title="Leaves this site immediately (Esc)">Quick exit</button>
+  <a class="lnk" href="/#get">Download</a>
+  <button class="exit" title="Leaves this site immediately (Esc)">Quick exit</button>
 </div></nav>
 
-<main class="wrap">
+<main class="wrap" id="main">
+
+<a class="crumb" href="/"><span>&larr;</span> Back to Bloom Again</a>
 <h1>BloomAgain Privacy Policy</h1>
 <p><strong>Last updated: 10 September 2026</strong></p>
 <p><strong>Effective: 10 September 2026</strong></p>
@@ -426,24 +340,41 @@ footer a{text-decoration:none; margin-right:20px}
 <p><em>Draft — pending review by a licensed advocate. Contains no statutory section references by design; a lawyer must supply them.</em></p>
 </main>
 
-<footer><div class="wrap">
-  <a href="/">Home</a><a href="privacy.html">Privacy Policy</a><a href="support.html">Support</a>
-  <p style="margin-top:18px">Bloom Again by Solvixalabs.</p>
+<footer class="site"><div class="wrap">
+  <div class="fgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><img src="img/icon-32.png" alt="" width="32" height="32"> Bloom Again</a>
+      <p>A private record of what actually happened. Built for someone who may
+      be watched.</p>
+      <a class="btn btn-ghost btn-sm" href="https://apps.apple.com/app/id6793663067">Download for iPhone</a>
+    </div>
+    <nav aria-label="Product">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="/#what">What it does</a></li>
+        <li><a href="/#privacy">Privacy by design</a></li>
+        <li><a href="/#plans">Plans</a></li>
+        <li><a href="/#platforms">iPhone and Android</a></li>
+        <li><a href="/#faq">Questions</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Company">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="support.html#delete">Delete your data</a></li>
+        <li><a href="mailto:support@bloomagain.app">support@bloomagain.app</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="legal">
+    <p class="fine">&copy; 2026 Solvixalabs. Bloom Again describes patterns
+    consistent with documented behaviours; it does not diagnose anyone, and it
+    is not a substitute for professional advice. Health features are for
+    personal wellness awareness only and are not medical measurements.</p>
+  </div>
 </div></footer>
 
-<script>
-(function () {
-  var nav = document.getElementById('nav');
-  var onScroll = function () { nav.classList.toggle('scrolled', scrollY > 8); };
-  addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
-// Quick exit: the same control the landing page carries, for the same
-// reason -- this page may be read on a device someone else checks.
-(function () {
-  var go = function () { location.replace('https://www.google.com/'); };
-  document.getElementById('exit').addEventListener('click', go);
-  addEventListener('keydown', function (e) { if (e.key === 'Escape') go(); });
-})();
-</script>
+<script src="site.js" defer></script>
 </body></html>

@@ -30,117 +30,23 @@
 <link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#fcfbfa" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#120f22" media="(prefers-color-scheme: dark)">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
 <style>
-:root{
-  --ink:#191430; --ink-2:#3d3557; --muted:#6b6285;
-  --bg:#fcfbfa; --bg-2:#f4f1f7; --card:#ffffff; --line:#e8e3f0;
-  --violet:#5b3fd6; --violet-soft:#efeafd;
-  --sage:#3f8f72; --rose:#c4547a;
-  --shadow:0 1px 2px rgba(25,20,48,.04), 0 12px 40px -12px rgba(25,20,48,.16);
-  --serif:"Fraunces",Georgia,serif;
-  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --measure:34rem;
-}
-@media (prefers-color-scheme:dark){
-  :root{
-    --ink:#f0edf8; --ink-2:#cdc6e0; --muted:#9a92b4;
-    --bg:#120f22; --bg-2:#191430; --card:#1d1836; --line:#302849;
-    --violet:#b3a1ff; --violet-soft:#241d42;
-    --sage:#6fc4a3; --rose:#f08aa8;
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 18px 50px -14px rgba(0,0,0,.6);
-  }
-}
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{
-  margin:0; background:var(--bg); color:var(--ink); overflow-x:hidden;
-  font-family:var(--sans); font-size:17px; line-height:1.65;
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-}
-.wrap{max-width:1080px; margin-inline:auto; padding-inline:clamp(20px,5vw,40px)}
-a{color:inherit}
+/* Landing page only. Shared tokens, nav, buttons and footer are in site.css. */
 
-/* ── nav ─────────────────────────────────────────────── */
-nav{
-  position:sticky; top:0; z-index:50;
-  backdrop-filter:saturate(1.6) blur(14px);
-  -webkit-backdrop-filter:saturate(1.6) blur(14px);
-  background:color-mix(in srgb, var(--bg) 82%, transparent);
-  border-bottom:1px solid transparent; transition:border-color .3s;
-}
-nav.scrolled{border-bottom-color:var(--line)}
-nav .inner{display:flex; align-items:center; gap:14px; height:66px}
-.brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:600; letter-spacing:-.015em}
-.brand .glyph{font-size:20px; line-height:1}
-nav .sp{flex:1}
-nav a.lnk{color:var(--muted); text-decoration:none; font-size:14.5px; margin-left:22px; transition:color .2s}
-nav a.lnk:hover{color:var(--ink)}
-.exit{
-  font:inherit; font-size:13px; font-weight:500; cursor:pointer;
-  color:var(--muted); background:transparent;
-  border:1px solid var(--line); border-radius:999px;
-  padding:6px 13px; margin-left:22px; transition:.2s;
-}
-.exit:hover{border-color:var(--rose); color:var(--rose)}
-/* Below ~640px the section links plus the exit button no longer fit the bar
-   and push the whole document sideways. The exit button is the one control
-   that must survive at every width, so the links go and it stays. */
-@media(max-width:640px){
-  nav a.lnk{display:none}
-  .exit{margin-left:auto}
-}
-
-/* ── type ────────────────────────────────────────────── */
 h1,h2,h3{font-family:var(--serif); font-weight:400; letter-spacing:-.02em; line-height:1.12}
 h1{font-size:clamp(2.6rem,6.4vw,4.5rem); margin:0 0 .5em; max-width:15ch}
 h2{font-size:clamp(1.9rem,3.6vw,2.7rem); margin:0 0 .45em; max-width:20ch}
 h3{font-family:var(--sans); font-size:1.02rem; font-weight:600; letter-spacing:-.01em; margin:0 0 .35em}
-p{margin:0 0 1.1em; max-width:var(--measure); color:var(--ink-2)}
+p{margin:0 0 1.1em; max-width:34rem; color:var(--ink-2)}
 .lede{font-size:clamp(1.08rem,1.9vw,1.28rem); color:var(--muted); line-height:1.6}
 .eyebrow{
   font-size:11.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
   color:var(--violet); margin:0 0 1.1em;
-}
-
-/* ── buttons ─────────────────────────────────────────── */
-.cta{display:flex; flex-wrap:wrap; align-items:center; gap:14px 18px; margin-top:2.2rem}
-.btn{
-  display:inline-flex; align-items:center; gap:9px;
-  font:inherit; font-size:15px; font-weight:600; letter-spacing:-.01em;
-  text-decoration:none; border-radius:999px; padding:13px 24px;
-  border:1px solid transparent; transition:transform .2s, box-shadow .2s, background .2s;
-}
-.btn svg{width:17px; height:17px; flex:none}
-.btn-primary{background:var(--violet); color:#fff; box-shadow:0 8px 24px -10px var(--violet)}
-.btn-primary:hover{transform:translateY(-1px); box-shadow:0 12px 30px -10px var(--violet)}
-@media (prefers-color-scheme:dark){.btn-primary{color:#151029}}
-.btn-ghost{border-color:var(--line); color:var(--ink-2); background:var(--card)}
-.btn-ghost:hover{border-color:var(--violet); color:var(--violet)}
-@media (prefers-reduced-motion:reduce){.btn{transition:none} .btn-primary:hover{transform:none}}
-.cta .note{font-size:13.5px; color:var(--muted); max-width:30ch}
-/* At phone width a pill with an icon and five words wraps mid-phrase around
-   the icon; full-width centred buttons read better than a ragged pill. */
-@media(max-width:480px){
-  .cta{gap:10px}
-  .cta .btn{width:100%; justify-content:center}
-  .cta .note{max-width:none; margin-top:.4rem}
-}
-
-/* closing download band */
-.band{
-  background:var(--bg-2); border:1px solid var(--line); border-radius:22px;
-  padding:clamp(34px,5vw,60px); text-align:center;
-}
-.band h2{margin-inline:auto; max-width:18ch}
-.band p{margin-inline:auto}
-.band .cta{justify-content:center}
-.band .icon{
-  width:74px; height:74px; border-radius:18px; display:block;
-  margin:0 auto 22px; box-shadow:var(--shadow);
 }
 
 /* ── hero ────────────────────────────────────────────── */
@@ -164,11 +70,11 @@ header.hero::before{
   scrollbar-width:none;
 }
 .gallery::-webkit-scrollbar{display:none}
-.shot{flex:0 0 auto; width:clamp(200px,23vw,258px); scroll-snap-align:center}
+.shot{flex:0 0 auto; width:clamp(200px,23vw,258px); scroll-snap-align:center; margin:0}
 .shot img{
   /* width/height attributes carry the aspect ratio so the gallery does not
-     reflow when the shots load; height:auto keeps them from being used as
-     a literal pixel height. */
+     reflow as the shots load; height:auto keeps them from being used as a
+     literal pixel height. */
   display:block; width:100%; height:auto; border-radius:26px;
   border:1px solid var(--line); background:var(--card);
   box-shadow:var(--shadow);
@@ -185,6 +91,9 @@ section{padding:clamp(64px,9vw,116px) 0}
 .two{display:grid; gap:clamp(28px,5vw,64px); grid-template-columns:1fr}
 @media(min-width:840px){.two{grid-template-columns:0.95fr 1.05fr; align-items:start}}
 
+/* The grid paints its hairlines from the container background, so a row that
+   does not fill leaves a bare slab of --line. Keep the cell count a multiple
+   of both 2 and 3. */
 .grid{display:grid; gap:1px; background:var(--line); border:1px solid var(--line);
   border-radius:18px; overflow:hidden; grid-template-columns:1fr}
 @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
@@ -225,6 +134,41 @@ section{padding:clamp(64px,9vw,116px) 0}
 .plan.trial .name{color:var(--sage)}
 .plan p{margin:0; font-size:14px; color:var(--muted)}
 
+/* platforms */
+.plats{display:grid; gap:16px; grid-template-columns:1fr; margin-top:2.2rem}
+@media(min-width:720px){.plats{grid-template-columns:1fr 1fr}}
+.plat{
+  border:1px solid var(--line); border-radius:18px; background:var(--card);
+  padding:clamp(24px,3.5vw,32px); display:flex; flex-direction:column; gap:10px;
+}
+.plat .tag{
+  align-self:flex-start; font-size:11px; font-weight:600; letter-spacing:.1em;
+  text-transform:uppercase; padding:4px 10px; border-radius:999px;
+}
+.plat.live .tag{background:color-mix(in srgb,var(--sage) 16%,transparent); color:var(--sage)}
+.plat.soon .tag{background:var(--violet-soft); color:var(--violet)}
+.plat h3{font-size:1.15rem}
+.plat p{margin:0; font-size:14.6px; color:var(--muted)}
+.plat .cta{margin-top:auto; padding-top:18px}
+
+/* faq */
+.faq{margin-top:2.2rem; border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  cursor:pointer; list-style:none; padding:20px 44px 20px 0; position:relative;
+  font-weight:600; font-size:16px; letter-spacing:-.01em; color:var(--ink);
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+"; position:absolute; right:8px; top:50%; translate:0 -50%;
+  font-size:22px; font-weight:400; color:var(--muted); line-height:1;
+}
+.faq details[open] summary::after{content:"\2212"}
+.faq summary:hover{color:var(--violet)}
+.faq .a{padding:0 0 22px; max-width:62ch}
+.faq .a p{font-size:15.4px; margin:0 0 .8em}
+.faq .a p:last-child{margin:0}
+
 /* safety */
 .safety{
   border-left:3px solid var(--rose); background:var(--card);
@@ -235,17 +179,18 @@ section{padding:clamp(64px,9vw,116px) 0}
 .safety p{font-size:14.6px; margin-bottom:.6em}
 .safety p:last-child{margin:0}
 
-footer{border-top:1px solid var(--line); padding:44px 0 72px; color:var(--muted); font-size:14px}
-footer .fl{display:flex; gap:22px; flex-wrap:wrap; margin-bottom:22px}
-footer a{text-decoration:none; transition:color .2s}
-footer a:hover{color:var(--violet)}
-.fine{font-size:12.6px; line-height:1.65; max-width:64ch; color:var(--muted)}
-
-/* reveal */
-.rv{opacity:0; transform:translateY(14px); transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1)}
-.rv.in{opacity:1; transform:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1; transform:none; transition:none}}
-:focus-visible{outline:2px solid var(--violet); outline-offset:3px; border-radius:4px}
+/* closing download band */
+.band{
+  background:var(--bg-2); border:1px solid var(--line); border-radius:22px;
+  padding:clamp(34px,5vw,60px); text-align:center;
+}
+.band h2{margin-inline:auto; max-width:18ch}
+.band p{margin-inline:auto}
+.band .cta{justify-content:center}
+.band .icon{
+  width:74px; height:74px; border-radius:18px; display:block;
+  margin:0 auto 22px; box-shadow:var(--shadow);
+}
 </style>
 <noscript><style>.rv{opacity:1; transform:none}</style></noscript>
 
@@ -261,6 +206,7 @@ footer a:hover{color:var(--violet)}
   "applicationCategory": "HealthApplication",
   "operatingSystem": "iOS 15.6 or later",
   "inLanguage": ["en", "hi", "te"],
+  "publisher": { "@type": "Organization", "name": "Solvixalabs" },
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -269,20 +215,81 @@ footer a:hover{color:var(--violet)}
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I have to create an account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Continue privately starts the app with no email and no password. The trade-off is real: an account that exists only on your phone cannot be recovered if the phone is lost — by you, or by us. You can add an email later from Profile → Secure your account."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can anyone at Bloom Again read what I write?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Entries and vault files are encrypted on your device before they are stored, with a key that stays on the phone unless you add a passphrase to wrap it. No human reads your AI conversations either. The privacy policy sets out exactly what is collected and what never is."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will it show up on a shared phone bill or a family account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Purchases appear in the Apple account that paid for them, under the product name shown at checkout. If the device or the Apple account is shared with the person you are documenting, stay on the free tier and read the safety notes in Support first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this therapy, or legal advice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Neither. It is a documentation and self-support tool. It describes patterns consistent with documented behaviours; it does not diagnose anyone, and it is not a substitute for a professional. It never contacts anyone on your behalf."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I get my entries out again?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Export everything you have written at any time, and delete the account permanently from inside the app — including an account you started privately. How deletion works."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When is it coming to Android?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The build is done and on internal testing. Google requires a closed test to run before a new app can be published, so there is a fixed waiting period we cannot shorten. Email us and we will tell you the day it opens."
+      }
+    }
+  ]
+}
+</script>
 </head><body>
 
-<nav id="nav"><div class="wrap inner">
-  <a class="brand" href="/"><span class="glyph">🌸</span> Bloom Again</a>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="site" id="nav"><div class="inner">
+  <a class="brand" href="/"><img src="img/icon-32.png" alt="" width="32" height="32"> Bloom Again</a>
   <span class="sp"></span>
   <a class="lnk" href="#what">What it does</a>
   <a class="lnk" href="#privacy">Privacy</a>
+  <a class="lnk" href="#faq">FAQ</a>
   <a class="lnk" href="support.html">Support</a>
-  <a class="lnk" href="https://apps.apple.com/app/id6793663067">Download</a>
-  <button class="exit" id="exit" title="Leaves this site immediately (Esc)">Quick exit</button>
+  <a class="lnk" href="#get">Download</a>
+  <button class="exit" title="Leaves this site immediately (Esc)">Quick exit</button>
 </div></nav>
 
+<main id="main">
+
 <header class="hero"><div class="wrap">
-  <p class="eyebrow rv">For iPhone and iPad</p>
+  <p class="eyebrow rv">For iPhone and iPad · Android in testing</p>
   <h1 class="rv">A record of what actually happened.</h1>
   <p class="lede rv">When someone rewrites events for long enough, you start to
   doubt your own memory. Bloom Again is a private place to put the facts down
@@ -295,7 +302,8 @@ footer a:hover{color:var(--violet)}
 
   <div class="cta rv">
     <a class="btn btn-primary" href="https://apps.apple.com/app/id6793663067">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7 2-1.1 2.8-2.2c.9-1.2 1.2-2.4 1.2-2.5 0 0-2.4-.9-2.4-3.6zM14.2 5.9c.6-.8 1-1.9.9-3-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-.9 2.9 1 .1 2-.5 2.7-1.3z"/></svg> Download on the App Store</a>
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7 2-1.1 2.8-2.2c.9-1.2 1.2-2.4 1.2-2.5 0 0-2.4-.9-2.4-3.6zM14.2 5.9c.6-.8 1-1.9.9-3-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-.9 2.9 1 .1 2-.5 2.7-1.3z"/></svg>
+      Download on the App Store</a>
     <a class="btn btn-ghost" href="#what">See what it does</a>
     <p class="note">Free to download. Two days of everything before you decide anything.</p>
   </div>
@@ -350,7 +358,7 @@ footer a:hover{color:var(--violet)}
 <section id="privacy"><div class="wrap"><div class="panel rv">
   <p class="eyebrow">Privacy is the product</p>
   <h2>Built for someone who may be watched.</h2>
-  <p>That shaped the engineering, not only the wording. Three decisions matter
+  <p>That shaped the engineering, not only the wording. Four decisions matter
   more than the rest.</p>
 
   <ul class="list">
@@ -363,9 +371,10 @@ footer a:hover{color:var(--violet)}
     <li><span class="k">4</span><div><h3>Off until you say otherwise</h3>
       <p>Analytics, crash reporting, health and voice are each disabled until you turn them on. Export or delete everything, permanently.</p></div></li>
   </ul>
+  <p style="margin:2rem 0 0"><a class="btn btn-ghost btn-sm" href="privacy.html">Read the full privacy policy</a></p>
 </div></div></section>
 
-<section><div class="wrap">
+<section id="plans"><div class="wrap">
   <p class="eyebrow rv">Plans</p>
   <h2 class="rv">Two days of everything, before you decide anything.</h2>
   <p class="lede rv" style="margin-bottom:2.2rem">Every new account starts with a full trial, including ten AI requests. No card.</p>
@@ -385,6 +394,90 @@ footer a:hover{color:var(--violet)}
   </div>
 </div></section>
 
+<section id="platforms"><div class="wrap">
+  <p class="eyebrow rv">Devices</p>
+  <h2 class="rv">Where you can use it today.</h2>
+  <div class="plats rv">
+    <div class="plat live">
+      <span class="tag">Available now</span>
+      <h3>iPhone and iPad</h3>
+      <p>Requires iOS 15.6 or later. English, हिन्दी and తెలుగు. Subscriptions
+      are billed by Apple and cancel from Settings at any time.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://apps.apple.com/app/id6793663067">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7 2-1.1 2.8-2.2c.9-1.2 1.2-2.4 1.2-2.5 0 0-2.4-.9-2.4-3.6zM14.2 5.9c.6-.8 1-1.9.9-3-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-.9 2.9 1 .1 2-.5 2.7-1.3z"/></svg>
+          Download on the App Store</a>
+      </div>
+    </div>
+    <div class="plat soon">
+      <span class="tag">In testing</span>
+      <h3>Android</h3>
+      <p>The Android build is finished and running on internal testing. Google
+      requires a closed test before a new app can be published, so the Play
+      listing is not public yet. Same app, same encryption, same three
+      languages.</p>
+      <p>Ask us to tell you when it opens, or to join the test.</p>
+      <div class="cta">
+        <a class="btn btn-ghost" href="mailto:support@bloomagain.app?subject=Android%20early%20access">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 9.5l-1.8-3.1a.4.4 0 01.1-.5.4.4 0 01.5.1l1.8 3.2A10.6 10.6 0 0112 8a10.6 10.6 0 01-6.2 1.2l1.8-3.2a.4.4 0 00-.1-.5.4.4 0 00-.5.1L5.2 9.5A6.4 6.4 0 002 14.6h20a6.4 6.4 0 00-4.4-5.1zM7.3 12.7a.8.8 0 11.8-.8.8.8 0 01-.8.8zm9.4 0a.8.8 0 11.8-.8.8.8 0 01-.8.8z"/></svg>
+          Tell me when Android is ready</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <p class="eyebrow rv">Questions</p>
+  <h2 class="rv">Before you download.</h2>
+  <div class="faq rv">
+    <details>
+      <summary>Do I have to create an account?</summary>
+      <div class="a"><p>No. <em>Continue privately</em> starts the app with no
+      email and no password. The trade-off is real: an account that exists only
+      on your phone cannot be recovered if the phone is lost — by you, or by
+      us. You can add an email later from Profile → Secure your account.</p></div>
+    </details>
+    <details>
+      <summary>Can anyone at Bloom Again read what I write?</summary>
+      <div class="a"><p>No. Entries and vault files are encrypted on your device
+      before they are stored, with a key that stays on the phone unless you add
+      a passphrase to wrap it. No human reads your AI conversations either. The
+      <a href="privacy.html">privacy policy</a> sets out exactly what is
+      collected and what never is.</p></div>
+    </details>
+    <details>
+      <summary>Will it show up on a shared phone bill or a family account?</summary>
+      <div class="a"><p>Purchases appear in the Apple account that paid for
+      them, under the product name shown at checkout. If the device or the
+      Apple account is shared with the person you are documenting, stay on the
+      free tier and read the safety notes in
+      <a href="support.html">Support</a> first.</p></div>
+    </details>
+    <details>
+      <summary>Is this therapy, or legal advice?</summary>
+      <div class="a"><p>Neither. It is a documentation and self-support tool. It
+      describes patterns consistent with documented behaviours; it does not
+      diagnose anyone, and it is not a substitute for a professional. It never
+      contacts anyone on your behalf.</p></div>
+    </details>
+    <details>
+      <summary>Can I get my entries out again?</summary>
+      <div class="a"><p>Yes. Export everything you have written at any time, and
+      delete the account permanently from inside the app — including an account
+      you started privately.
+      <a href="support.html#delete">How deletion works.</a></p></div>
+    </details>
+    <details>
+      <summary>When is it coming to Android?</summary>
+      <div class="a"><p>The build is done and on internal testing. Google
+      requires a closed test to run before a new app can be published, so there
+      is a fixed waiting period we cannot shorten.
+      <a href="mailto:support@bloomagain.app?subject=Android%20early%20access">Email
+      us</a> and we will tell you the day it opens.</p></div>
+    </details>
+  </div>
+</div></section>
+
 <section id="get"><div class="wrap"><div class="band rv">
   <img class="icon" src="img/icon-192.png" alt="" width="192" height="192" loading="lazy" decoding="async">
   <p class="eyebrow">Free on the App Store</p>
@@ -394,60 +487,50 @@ footer a:hover{color:var(--violet)}
   remember it clearly.</p>
   <div class="cta">
     <a class="btn btn-primary" href="https://apps.apple.com/app/id6793663067">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7 2-1.1 2.8-2.2c.9-1.2 1.2-2.4 1.2-2.5 0 0-2.4-.9-2.4-3.6zM14.2 5.9c.6-.8 1-1.9.9-3-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-.9 2.9 1 .1 2-.5 2.7-1.3z"/></svg> Download on the App Store</a>
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7 2-1.1 2.8-2.2c.9-1.2 1.2-2.4 1.2-2.5 0 0-2.4-.9-2.4-3.6zM14.2 5.9c.6-.8 1-1.9.9-3-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-.9 2.9 1 .1 2-.5 2.7-1.3z"/></svg>
+      Download on the App Store</a>
   </div>
-  <p class="note" style="margin:1.4rem auto 0; font-size:13.5px; color:var(--muted); max-width:42ch">
-    Requires iOS 15.6 or later. iPhone and iPad. Android is not available yet.</p>
+  <p class="note" style="margin:1.4rem auto 0; font-size:13.5px; color:var(--muted); max-width:44ch">
+    Requires iOS 15.6 or later. <a href="#platforms" style="color:var(--violet)">Android is in testing.</a></p>
 </div></div></section>
 
-<footer><div class="wrap">
-  <div class="fl">
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="support.html">Support</a>
-    <a href="mailto:support@bloomagain.app">support@bloomagain.app</a>
+</main>
+
+<footer class="site"><div class="wrap">
+  <div class="fgrid">
+    <div class="fbrand">
+      <a class="brand" href="/"><img src="img/icon-32.png" alt="" width="32" height="32"> Bloom Again</a>
+      <p>A private record of what actually happened. Built for someone who may
+      be watched.</p>
+      <a class="btn btn-ghost btn-sm" href="https://apps.apple.com/app/id6793663067">Download for iPhone</a>
+    </div>
+    <nav aria-label="Product">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#what">What it does</a></li>
+        <li><a href="#privacy">Privacy by design</a></li>
+        <li><a href="#plans">Plans</a></li>
+        <li><a href="#platforms">iPhone and Android</a></li>
+        <li><a href="#faq">Questions</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Company">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="support.html#delete">Delete your data</a></li>
+        <li><a href="mailto:support@bloomagain.app">support@bloomagain.app</a></li>
+      </ul>
+    </nav>
   </div>
-  <p class="fine">Bloom Again by Solvixalabs. Analysis in this app describes
-  patterns consistent with documented behaviours; it does not diagnose anyone,
-  and it is not a substitute for professional advice. Health features are for
-  personal wellness awareness only and are not medical measurements.</p>
+  <div class="legal">
+    <p class="fine">© 2026 Solvixalabs. Bloom Again describes patterns
+    consistent with documented behaviours; it does not diagnose anyone, and it
+    is not a substitute for professional advice. Health features are for
+    personal wellness awareness only and are not medical measurements.</p>
+  </div>
 </div></footer>
 
-<script>
-// Reveal on scroll. Everything is visible without JS -- the class is only
-// added once the observer is known to work, so a failure shows the page
-// rather than hiding it.
-(function () {
-  var els = document.querySelectorAll('.rv');
-  if (!('IntersectionObserver' in window) ||
-      matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    els.forEach(function (el) { el.classList.add('in'); });
-    return;
-  }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-  els.forEach(function (el, i) {
-    el.style.transitionDelay = Math.min(i % 4, 3) * 60 + 'ms';
-    io.observe(el);
-  });
-})();
-
-// Hairline under the nav only once the page has moved.
-(function () {
-  var nav = document.getElementById('nav');
-  var onScroll = function () { nav.classList.toggle('scrolled', scrollY > 8); };
-  addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
-
-// Quick exit. Standard on sites read by people whose device may be checked:
-// leave immediately, and try not to leave this page in session history.
-(function () {
-  var go = function () { location.replace('https://www.google.com/'); };
-  document.getElementById('exit').addEventListener('click', go);
-  addEventListener('keydown', function (e) { if (e.key === 'Escape') go(); });
-})();
-</script>
+<script src="site.js" defer></script>
 </body></html>

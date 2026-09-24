@@ -1,0 +1,51 @@
+/* Long-form pages (support, privacy). Loaded after site.css.
+   Legal and help text needs a narrower measure and a plainer rhythm than the
+   landing page, so the scale differs -- the palette and fonts do not. */
+
+:root{--wrap:720px; --gutter:clamp(20px,5vw,36px)}
+body{font-size:16.5px; line-height:1.72}
+a{color:var(--violet)}
+
+h1,h2{font-family:var(--serif); font-weight:400; letter-spacing:-.02em; line-height:1.15}
+h1{font-size:clamp(2.1rem,5vw,3rem); margin:.2em 0 .3em}
+h2{font-size:clamp(1.35rem,2.6vw,1.75rem); margin:2.6em 0 .5em}
+h3{font-family:var(--sans); font-size:1.02rem; font-weight:600;
+  letter-spacing:-.01em; margin:2em 0 .4em}
+h4{font-family:var(--sans); font-size:.9rem; font-weight:600; color:var(--muted);
+  text-transform:uppercase; letter-spacing:.08em; margin:1.8em 0 .5em}
+p,li{color:var(--ink-2)}
+p{margin:0 0 1.15em}
+ul,ol{padding-left:1.25em}
+li{margin-bottom:.45em}
+hr{border:0; border-top:1px solid var(--line); margin:3em 0}
+
+/* A visible way back, because these pages are usually arrived at from an app
+   store listing or a deep link rather than from the landing page. */
+.crumb{
+  display:inline-flex; align-items:center; gap:7px; margin-top:clamp(30px,5vw,48px);
+  font-size:14px; color:var(--muted); text-decoration:none; transition:color .2s;
+}
+.crumb:hover{color:var(--violet)}
+.crumb span{font-size:16px; line-height:1}
+.pagelede{font-size:1.1rem; color:var(--muted); margin-bottom:2em}
+
+blockquote{
+  margin:1.8em 0; padding:16px 20px; background:var(--card);
+  border-left:3px solid var(--violet); border-radius:0 12px 12px 0;
+  color:var(--muted); box-shadow:var(--shadow);
+}
+blockquote p:last-child{margin:0}
+code{background:var(--violet-soft); padding:2px 6px; border-radius:5px;
+  font-size:.88em; font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.tablewrap{overflow-x:auto; margin:1.6em 0; border:1px solid var(--line);
+  border-radius:12px}
+table{border-collapse:collapse; width:100%; font-size:14.4px; background:var(--card)}
+th,td{border-bottom:1px solid var(--line); padding:11px 14px; text-align:left;
+  vertical-align:top; color:var(--ink-2)}
+th{background:var(--bg-2); font-weight:600; color:var(--ink);
+  font-size:13px; letter-spacing:.01em}
+tr:last-child td{border-bottom:0}
+.card{background:var(--card); border:1px solid var(--line); border-radius:16px;
+  padding:22px 26px; margin:1.8em 0; box-shadow:var(--shadow)}
+.card h3{margin-top:0}
+.card p:last-child{margin:0}

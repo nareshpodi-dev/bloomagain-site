@@ -1,0 +1,148 @@
+/* Bloom Again — shared chrome.
+   Every page loads this: tokens, nav, footer, buttons, reveal. Page-specific
+   layout stays in that page's own <style>. Before this file the three pages
+   each carried their own copy of the palette and the nav, and they had already
+   begun to drift; a token changed here now changes everywhere. */
+
+:root{
+  --ink:#191430; --ink-2:#3d3557; --muted:#6b6285;
+  --bg:#fcfbfa; --bg-2:#f4f1f7; --card:#ffffff; --line:#e8e3f0;
+  --violet:#5b3fd6; --violet-soft:#efeafd;
+  --sage:#3f8f72; --rose:#c4547a;
+  --shadow:0 1px 2px rgba(25,20,48,.04), 0 12px 40px -12px rgba(25,20,48,.16);
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --wrap:1080px;          /* long-form pages narrow this to 720px */
+  --gutter:clamp(20px,5vw,40px);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#f0edf8; --ink-2:#cdc6e0; --muted:#9a92b4;
+    --bg:#120f22; --bg-2:#191430; --card:#1d1836; --line:#302849;
+    --violet:#b3a1ff; --violet-soft:#241d42;
+    --sage:#6fc4a3; --rose:#f08aa8;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 18px 50px -14px rgba(0,0,0,.6);
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; background:var(--bg); color:var(--ink); overflow-x:hidden;
+  font-family:var(--sans); font-size:17px; line-height:1.65;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--violet); outline-offset:3px; border-radius:4px}
+.wrap{max-width:var(--wrap); margin-inline:auto; padding-inline:var(--gutter)}
+
+/* Keyboard users should not have to tab the whole nav on every page. */
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:100;
+  background:var(--violet); color:#fff; padding:10px 18px;
+  border-radius:0 0 10px 0; font-size:14px; font-weight:600; text-decoration:none;
+}
+.skip:focus{left:0}
+
+/* ── nav ─────────────────────────────────────────────── */
+nav.site{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter:saturate(1.6) blur(14px);
+  -webkit-backdrop-filter:saturate(1.6) blur(14px);
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  border-bottom:1px solid transparent; transition:border-color .3s;
+}
+nav.site.scrolled{border-bottom-color:var(--line)}
+nav.site .inner{
+  display:flex; align-items:center; gap:14px; height:66px;
+  max-width:var(--wrap); margin-inline:auto; padding-inline:var(--gutter);
+}
+.brand{
+  display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+  color:var(--ink); font-weight:600; letter-spacing:-.015em; white-space:nowrap;
+}
+.brand img{width:26px; height:26px; border-radius:7px; display:block}
+nav.site .sp{flex:1}
+nav.site a.lnk{
+  color:var(--muted); text-decoration:none; font-size:14.5px;
+  margin-left:22px; transition:color .2s; white-space:nowrap;
+}
+nav.site a.lnk:hover,nav.site a.lnk[aria-current="page"]{color:var(--ink)}
+nav.site a.lnk[aria-current="page"]{font-weight:600}
+.exit{
+  font:inherit; font-size:13px; font-weight:500; cursor:pointer;
+  color:var(--muted); background:transparent;
+  border:1px solid var(--line); border-radius:999px;
+  padding:6px 13px; margin-left:22px; transition:.2s; white-space:nowrap;
+}
+.exit:hover{border-color:var(--rose); color:var(--rose)}
+/* Below ~720px the links plus the exit button no longer fit and push the
+   document sideways. The exit button is the one control that must survive at
+   every width, so the links collapse into the footer and it stays. */
+@media(max-width:720px){
+  nav.site a.lnk{display:none}
+  .exit{margin-left:auto}
+}
+
+/* ── buttons ─────────────────────────────────────────── */
+.cta{display:flex; flex-wrap:wrap; align-items:center; gap:14px 18px; margin-top:2.2rem}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  font:inherit; font-size:15px; font-weight:600; letter-spacing:-.01em;
+  text-decoration:none; border-radius:999px; padding:13px 24px;
+  border:1px solid transparent; cursor:pointer;
+  transition:transform .2s, box-shadow .2s, background .2s, border-color .2s, color .2s;
+}
+.btn svg{width:17px; height:17px; flex:none}
+.btn-primary{background:var(--violet); color:#fff; box-shadow:0 8px 24px -10px var(--violet)}
+.btn-primary:hover{transform:translateY(-1px); box-shadow:0 12px 30px -10px var(--violet)}
+@media (prefers-color-scheme:dark){.btn-primary{color:#151029}}
+.btn-ghost{border-color:var(--line); color:var(--ink-2); background:var(--card)}
+.btn-ghost:hover{border-color:var(--violet); color:var(--violet)}
+.btn-sm{font-size:14px; padding:10px 18px}
+@media (prefers-reduced-motion:reduce){.btn{transition:none} .btn-primary:hover{transform:none}}
+.cta .note{font-size:13.5px; color:var(--muted); max-width:30ch}
+/* At phone width a pill with an icon and five words wraps around the icon;
+   full-width centred buttons read better than a ragged pill. */
+@media(max-width:480px){
+  .cta{gap:10px}
+  .cta .btn{width:100%}
+  .cta .note{max-width:none; margin-top:.4rem}
+}
+
+/* ── footer ──────────────────────────────────────────── */
+footer.site{border-top:1px solid var(--line); margin-top:4rem; padding:clamp(40px,6vw,64px) 0 64px}
+footer.site .fgrid{
+  display:grid; gap:clamp(28px,4vw,44px);
+  grid-template-columns:1fr; align-items:start;
+}
+@media(min-width:620px){footer.site .fgrid{grid-template-columns:1.4fr 1fr 1fr}}
+footer.site .fbrand p{
+  margin:.9em 0 1.2em; font-size:14.5px; color:var(--muted); max-width:30ch; line-height:1.6;
+}
+footer.site h4{
+  font-family:var(--sans); font-size:11.5px; font-weight:600; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--muted); margin:0 0 .9em;
+}
+footer.site ul{list-style:none; margin:0; padding:0; display:grid; gap:.6em}
+footer.site li a{
+  color:var(--ink-2); text-decoration:none; font-size:14.5px; transition:color .2s;
+}
+footer.site li a:hover{color:var(--violet)}
+footer.site .legal{
+  margin-top:clamp(34px,5vw,52px); padding-top:26px; border-top:1px solid var(--line);
+  display:flex; flex-wrap:wrap; gap:10px 26px; align-items:baseline;
+  font-size:13px; color:var(--muted);
+}
+footer.site .legal .fine{
+  flex:1 1 34ch; margin:0; font-size:12.6px; line-height:1.65; max-width:70ch; color:var(--muted);
+}
+
+/* ── reveal on scroll ────────────────────────────────── */
+.rv{
+  opacity:0; transform:translateY(14px);
+  transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1);
+}
+.rv.in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1; transform:none; transition:none}}
