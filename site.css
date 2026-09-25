@@ -77,12 +77,58 @@ nav.site a.lnk[aria-current="page"]{font-weight:600}
   padding:6px 13px; margin-left:22px; transition:.2s; white-space:nowrap;
 }
 .exit:hover{border-color:var(--rose); color:var(--rose)}
-/* Below ~720px the links plus the exit button no longer fit and push the
-   document sideways. The exit button is the one control that must survive at
-   every width, so the links collapse into the footer and it stays. */
+/* Anchor targets must clear the sticky bar, or a jump to #delete lands with
+   the heading hidden underneath it. */
+:target{scroll-margin-top:84px}
+[id]{scroll-margin-top:84px}
+
+/* ── mobile menu ─────────────────────────────────────── */
+/* Below ~720px the inline links no longer fit beside the exit button. They
+   used to be display:none with nothing in their place, which left the inner
+   pages with no navigation at all on a phone -- the brand mark and Quick exit
+   were the entire bar. They now collapse into this panel instead. */
+.menu-btn{
+  display:none; align-items:center; justify-content:center;
+  width:38px; height:38px; margin-left:12px; padding:0;
+  background:transparent; border:1px solid var(--line); border-radius:11px;
+  color:var(--ink); cursor:pointer; transition:border-color .2s, color .2s;
+}
+.menu-btn:hover{border-color:var(--violet); color:var(--violet)}
+.menu-btn svg{width:18px; height:18px; display:block}
+.menu-btn .close{display:none}
+.menu-btn[aria-expanded="true"] .open{display:none}
+.menu-btn[aria-expanded="true"] .close{display:block}
+
+#menu{
+  display:none;
+  border-top:1px solid var(--line);
+  background:color-mix(in srgb, var(--bg) 97%, transparent);
+  backdrop-filter:saturate(1.6) blur(14px);
+  -webkit-backdrop-filter:saturate(1.6) blur(14px);
+  padding:10px var(--gutter) 22px;
+}
+#menu.open{display:block}
+#menu a{
+  display:block; padding:13px 0; text-decoration:none; font-size:16px;
+  font-weight:500; color:var(--ink-2); border-bottom:1px solid var(--line);
+}
+#menu a:last-of-type{border-bottom:0}
+#menu a[aria-current="page"]{color:var(--violet); font-weight:600}
+#menu .btn{margin-top:16px; width:100%}
+
 @media(max-width:720px){
   nav.site a.lnk{display:none}
-  .exit{margin-left:auto}
+  .menu-btn{display:inline-flex}
+  /* Quick exit sits left of the menu with a real gap between them. They were
+     adjacent at first and a reach for the menu ejected you from the site --
+     harmless once, but this audience should never be surprised by that
+     button, in either direction. Different shapes as well as different
+     positions: a pill and a square. */
+  .exit{margin-left:auto; order:1}
+  .menu-btn{order:2; margin-left:14px}
+}
+@media(min-width:721px){
+  #menu{display:none !important}
 }
 
 /* ── buttons ─────────────────────────────────────────── */
@@ -146,3 +192,15 @@ footer.site .legal .fine{
 }
 .rv.in{opacity:1; transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1; transform:none; transition:none}}
+
+/* ── print ───────────────────────────────────────────── */
+/* People print the privacy policy and the deletion instructions. Chrome and
+   the exit button are noise on paper; links need their targets spelled out. */
+@media print{
+  nav.site, footer.site, .skip, .exit, .menu-btn, #menu, .crumb, .toc{display:none !important}
+  body{background:#fff; color:#000; font-size:11pt}
+  a{color:#000; text-decoration:underline}
+  main a[href^="http"]::after{content:" (" attr(href) ")"; font-size:9pt; word-break:break-all}
+  .card, blockquote, .tablewrap{break-inside:avoid; box-shadow:none}
+  h1,h2,h3{break-after:avoid}
+}

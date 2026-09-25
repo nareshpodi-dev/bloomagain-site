@@ -31,6 +31,39 @@
   onScroll();
 })();
 
+// Mobile menu. The panel is plain markup below the bar, so it works with the
+// document flow rather than trapping focus in an overlay.
+//
+// Escape is NOT bound to closing this. Escape is the quick exit, and that has
+// to work the instant it is pressed whatever else is on screen -- a menu is
+// not worth a delay. The menu closes on the button, on a link, or on a tap
+// outside it.
+(function () {
+  var btn = document.querySelector('.menu-btn');
+  var menu = document.getElementById('menu');
+  if (!btn || !menu) return;
+  var set = function (open) {
+    menu.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    set(!menu.classList.contains('open'));
+  });
+  menu.addEventListener('click', function (e) {
+    if (e.target.closest('a')) set(false);
+  });
+  document.addEventListener('click', function (e) {
+    if (menu.classList.contains('open') && !menu.contains(e.target)) set(false);
+  });
+  // A resize past the breakpoint leaves the panel open but hidden; reset it
+  // so the button's state matches what is on screen.
+  addEventListener('resize', function () {
+    if (innerWidth > 720) set(false);
+  });
+})();
+
 // Quick exit. Standard on sites read by people whose device may be checked:
 // leave immediately, and try not to leave this page in session history.
 (function () {
